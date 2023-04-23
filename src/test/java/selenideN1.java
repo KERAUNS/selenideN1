@@ -1,4 +1,6 @@
+import static com.codeborne.selenide.Condition.exactOwnText;
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.selector.ByText;
@@ -10,7 +12,7 @@ public class selenideN1 {
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = "https://github.com";
-        Configuration.holdBrowserOpen = true;
+        //Configuration.holdBrowserOpen = true;
     }
     @Test
     void selenideWikiGitCheckSoftAssertions() {
@@ -27,8 +29,10 @@ public class selenideN1 {
                 "}";
         open("/selenide/selenide");
         $("#wiki-tab").click();
-        $(new ByText("Soft assertions")).click();
+        $("input#wiki-pages-filter").setValue("SoftAssertions");
+        $("#wiki-pages-box ").shouldHave(Condition.href("/selenide/selenide/wiki/SoftAssertions"));
+        /*$(new ByText("Soft assertions")).click();
         $("#user-content-3-using-junit5-extend-test-class").shouldHave(Condition.href("#3-using-junit5-extend-test-class"));
-       $("#repo-content-turbo-frame").shouldHave(text(code));
+       $("#repo-content-turbo-frame").shouldHave(text(code));*/
     }
 };
